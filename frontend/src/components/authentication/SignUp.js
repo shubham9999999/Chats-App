@@ -12,6 +12,7 @@ import React from "react";
 import { useState } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import { ChatState } from "../../Context/ChatProvider";
 
 function SignUp() {
   const [show, setShow] = useState(false);
@@ -23,6 +24,7 @@ function SignUp() {
   const [picLoading, setPicLoading] = useState(false);
   const toast = useToast();
   const history = useHistory();
+  const { setUser } = ChatState();
 
   const postDetails = (pics) => {
     setPicLoading(true);
@@ -110,7 +112,6 @@ function SignUp() {
         },
       });
 
-
       toast({
         title: "Registration successful.",
         status: "success",
@@ -119,6 +120,7 @@ function SignUp() {
         position: "bottom",
       });
       localStorage.setItem("userInfo", JSON.stringify(data));
+      setUser(data);
       setPicLoading(false);
       history.push("/chats");
     } catch (error) {
@@ -182,7 +184,7 @@ function SignUp() {
         </InputGroup>
       </FormControl>
 
-      <FormControl id="Picture" isRequired>
+      <FormControl id="Picture">
         <FormLabel>Upload Picture</FormLabel>
         <Input
           type="file"
