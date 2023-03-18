@@ -29,7 +29,7 @@ import axios from "axios";
 import UserListItem from "../UserAvatar/UserListItem";
 import ChatLoading from "../ChatLoading";
 import { getSender } from "../../configs/ChatLogics";
-import { Effect } from "react-notification-badge";
+import {Effect} from "react-notification-badge"
 import NotificationBadge from "react-notification-badge/lib/components/NotificationBadge";
 
 export default function SideDrawer() {
@@ -80,7 +80,10 @@ export default function SideDrawer() {
     try {
       setLoading(true);
 
-      const { data } = await axios.get(`/api/user?search=${search}`, config);
+      const { data } = await axios.get(
+        `/api/user?search=${search}`,
+        config
+      );
 
       setLoading(false);
       setSearchResult(data);
@@ -150,10 +153,7 @@ export default function SideDrawer() {
         </Text>
         <Menu>
           <MenuButton p={1}>
-            <NotificationBadge
-              count={notification.length}
-              effect={Effect.SCALE}
-            ></NotificationBadge>
+            <NotificationBadge count={notification.length} effect={Effect.SCALE}></NotificationBadge>
             <BellIcon fontSize={"2xl"} m="1" />
           </MenuButton>
           <MenuList pl={2}>
@@ -163,7 +163,7 @@ export default function SideDrawer() {
                 key={notif._id}
                 onClick={() => {
                   setSelectedChat(notif.chat);
-                  setNotification(notification.filter((n) => n !== notif));
+                  setNotification(notification.filter((n) => n != notif));
                 }}
               >
                 {notif.chat.isGroupChat
