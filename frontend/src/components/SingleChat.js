@@ -19,8 +19,9 @@ import "./styles.css";
 import io from "socket.io-client";
 import animationData from "../animations/typing.json";
 import Lottie from "react-lottie";
+import { ENDPOINT_URL } from "../Constants";
 
-const ENDPOINT = "https://chats-app-project.herokuapp.com/";
+const ENDPOINT = ENDPOINT_URL;
 var socket, selectedChatCompare;
 
 function SingleChat({ fetchAgain, setFetchAgain }) {
@@ -145,6 +146,7 @@ function SingleChat({ fetchAgain, setFetchAgain }) {
     if (!typing) {
       setTyping(true);
       socket.emit("typing", selectedChat._id);
+      console.log("hey");
     }
 
     let lastTyping = new Date().getTime();
